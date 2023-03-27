@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="confirm_merch" model="ir.ui.view">
+            <field name="name">stock.picking.confirm.merch</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button string="Recibir Mercadería" name="mostrar_validar" type="object" class="oe_highlight"  attrs="{'invisible': ['|', ('receive_merch', '=', True), ('state', '!=', 'assigned')]}"/>
+                </header>
+            </field>
+        </record>
+    </data>
+</odoo> 
