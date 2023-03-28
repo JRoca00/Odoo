@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="confirm_merch" model="ir.ui.view">
+            <field name="name">stock.picking.confirm.merch</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="action_set_quantities_to_reservation" position="before">
+                    <button string="Recibir Mercadería" name="mostrar_validar" type="object" class="btn-primary"  attrs="{'invisible': ['|', ('receive_merch', '=', True), ('state', '!=', 'assigned')]}"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo> 
+
+
+
+<!--
+    Agregar esto en los fields
+    <field name="receive_merch" invisible="1"/>
+
+    luego en el boton = button_validate en el attrs borra todo lo que tiene y le pegas esto
+    {'invisible': ['|', '|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False), ('receive_merch', '=', False)]}
+-->
