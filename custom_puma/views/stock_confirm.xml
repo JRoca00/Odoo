@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="confirm_merch" model="ir.ui.view">
+            <field name="name">stock.picking.confirm.merch</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="button_validate" position="replace">
+                    <field name="receive_merch" invisible="1"/>
+                    <button name="button_validate" attrs="{'invisible': ['|', '|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False), ('receive_merch', '=', False)]}" string="Validar" type="object" class="oe_highlight" groups="stock.group_stock_user" data-hotkey="v"/>
+                    <button name="button_validate" attrs="{'invisible': ['|', '|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False), ('receive_merch', '=', False)]}" string="Validar" type="object" groups="stock.group_stock_user" class="o_btn_validate" data-hotkey="v"/>
+                </button>
+                <button name="action_set_quantities_to_reservation" position="before">
+                    <field name="visible" invisible="1"/>
+                    <field name="receive_merch" invisible="1"/>
+                    <field name="visible_picking" invisible="1"/>
+                    <button string="Recibir Mercadería" name="mostrar_validar" type="object" class="btn-primary"  attrs="{'invisible': ['|','|','|', ('visible_picking', '=', False),('receive_merch', '=', True), ('state', '!=', 'assigned'),('visible', '=', True)]}"/>
+                </button>
+            </field>
+        </record>
+
+
+        <record id="view_location_assign" model="ir.ui.view">
+            <field name="name">view.location.assign</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <field name="location_id" position="after">
+                    <h6>Propietarios</h6>
+                    <h6>
+                        <field name="user_assigning" widget="many2many_tags"/>
+                    </h6>
+                </field>
+            </field>
+        </record>
+
+
+
+        <record id="Stock_picking_type_merch" model="ir.ui.view">
+            <field name="name">stock.picking.type.merch</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="show_operations" position="after">
+                    <field name="receive_merch_internal"/>
+                </field>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo> 
