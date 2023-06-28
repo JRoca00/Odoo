@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_ingresos"
+        string="Constancia de Ingresos"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="custom_rh.ingresos_report"
+        file="custom_rh.ingresos_report"
+    />
+
+    <report
+        id="report_constancia"
+        string="Constancia Laboral"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="custom_rh.CLaboral_report"
+        file="custom_rh.CLaboral_report"
+    />
+
+    <report
+        id="report_cuenta"
+        string="Constancia Apertura de Cuenta"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="custom_rh.CCuenta_report"
+        file="custom_rh.CCuenta_report"
+    />
+
+    <report
+        id="report_prestaciones"
+        string="Calculo Prestaciones"
+        model="hr.employee.pres"
+        report_type="qweb-pdf"
+        name="custom_rh.prestaciones_report"
+        file="custom_rh.prestaciones_report"
+    />
+</odoo>
