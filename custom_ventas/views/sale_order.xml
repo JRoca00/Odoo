@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Vista del formulario del modelo sale -->
+    <record model="ir.ui.view" id="wizard_sale">
+      <field name="name">wizard.sale</field>
+      <field name="model">wizard.sale</field>
+      <field name="arch" type="xml">
+        <form string="Cliente wizard">
+            <group>
+                <group>
+                    <field name="partner_id"/>
+                </group>
+                <group>
+                    <field name="product_id"/>
+                </group>
+            </group>
+            <footer>
+                <button name="action_print" string="Print" type="object" class="btn-secondary"/>    
+                <button name="action_print" string="Print" type="object" class="btn-secondary"/>
+                <button string="Cancel" class="btn-default" special="cancel"/>
+            </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Acción del wizard -->
+    <record model="ir.actions.act_window" id="action_wizard_sale">
+      <field name="name">WizardSale</field>
+      <field name="res_model">wizard.sale</field> <!-- Corregir el nombre del modelo -->
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="wizard_sale"/>
+      <field name="target">new</field>
+    </record>
+
+
+    <menuitem name="menu wizard" parent="sale.sale_menu_root" id="menu_wizard" action="action_wizard_sale"/>
+
+  </data>
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<odoo>
+    <data>
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.partner</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Proveedor">
+                        <field name="order_line_partner">
+                            <tree editable="top">
+                                <field name="product_id"/>
+                                <field name="description"/>
+                                <field name="partner_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+
+
+<odoo>
+    <data noupdate="0">
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Pedidos">
+                        <field name="new_order_line">
+                            <tree>
+                                <field name="product_id"/>
+                                <field name="description"/>
+                                <field name="vendor_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo> -->

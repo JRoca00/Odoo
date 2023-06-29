@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_appointment"
+        string="Reporte del wizard"
+        model="sale.order"
+        report_type="qweb-pdf"
+        name="custom_ventas.appointment_report"
+        file="custom_ventas.appointment_report"
+    />
+</odoo>
