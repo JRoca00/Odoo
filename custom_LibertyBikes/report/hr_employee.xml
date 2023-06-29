@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_appointment"
+        string="Constancia de Ingresos"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="custom_LibertyBikes.ingresos_report"
+        file="custom_LibertyBikes.ingresos_report"
+    />
+</odoo>
