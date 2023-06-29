@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_payment">
+            <t t-call="web.external_layout">
+                <div class="header">
+                    <h1>Reporte sobre plazos de pago</h1>
+                    Fecha: <t t-esc="doc.date"/>
+                </div>
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        Nombre:  <t t-esc="doc.partner_id.name"/>
+                        Cantidas de cuotas:  <t t-esc="doc.payment_quotes"/>
+                    </t>
+                </div>
+                <div class="footer">
+                    <p>Gracias por la confianza en nosotros</p>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>
+
+
+
+
+
+
+<!-- <template id="report_payment_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <h2>Registro Pagos</h2>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="report_payment">
+        <t t-call="web.external_layout">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <h2>prueba</h2>
+                Nombre:  <t t-esc="doc.partner_id.name"/>
+                Cantidas de cuotas:  <t t-esc="doc.payment_quotes"/>
+            </t>
+        </t>
+        </t>
+    </template>-->

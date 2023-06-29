@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">account.journal.credit.payment</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="is_credit_payment"/>
+                <field name="product_id" attrs=" {'invisible': [  ('is_credit_payment', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+    
+
+    <record id="view_payment_form_credit" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="visible" invisible="1"/>
+                <field name="reason_payment_account" attrs=" {'invisible': [  ('visible', '=', False)], 'required': [('visible', '=', True)]}" />
+                <field name="prueba" attrs=" {'invisible': [  ('visible', '=', False)]}">
+                    <tree>
+                        <field name ="name"/>
+                    </tree>
+                </field>
+                <field name="sale_id" attrs=" {'invisible': [  ('visible', '=', False)]}"  domain="[('partner_id', '=', partner_id)]"/>
+            </field>
+            <field name="ref" position="after">
+                <field name="payment_quotes" attrs=" {'invisible': [  ('visible', '=', False)], 'required': [('visible', '=', True)]}" />
+                <field name="v_contado" attrs="{'invisible': [  ('visible', '=', False)], 'required': [('visible', '=', True)]}"/>
+                <field name="charge" attrs=" {'invisible': [  ('visible', '=', False)]}"/>
+                <button name="calculado" string="Calcular" type="object" class="oe_highlight" attrs=" {'invisible': [  ('visible', '=', False)]}" />
+                <button name="add_customer_to_lines" string="Agregar a Lineas" type="object" class="oe_highlight"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="view_open_reason" >
+        <field name="name">view.reason.payment</field>
+        <field name="model">reason.payment</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+            <tree string="List">
+                <field name="name"/>
+            </tree>  
+        </field>
+   </record>
+
+
+
+    <record model="ir.actions.act_window" id="Reason_Payment_view">
+        <field name="name">Tipos de Pago</field>
+        <field name="res_model">reason.payment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="probando_search" model="ir.ui.view">
+        <field name="name">Probando el serch</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
+
+
+    </data>
+</odoo> 

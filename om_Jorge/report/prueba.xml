@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_payments"
+        string="Reporte de pagos"
+        model="account.payment"
+        report_type="qweb-pdf"
+        name="om_Jorge.report_payment"
+        file="om_Jorge.report_payment"/>
+</odoo>
