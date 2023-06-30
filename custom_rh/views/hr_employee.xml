@@ -20,7 +20,7 @@
                     <field name="employeeid"/>
                     <field name="reason"/>
                     <field name="average_salary" widget="monetary"/>
-                    <field name="total"/>
+                    <field name="total" sum="total"/>
                     <field name="state" decoration-success="state == 'done'" decoration-info="state == 'draft'" widget="badge"/>
                 </tree>
             </field>
