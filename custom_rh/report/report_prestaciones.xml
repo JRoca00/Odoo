@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="prestaciones_report">  
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top: 0px;">
+                    <t t-foreach="docs" t-as="doc">
+                            <tr>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 30px; margin-top: 5px; font-size: 13px; text-align: center;">LIQUIDACIÓN POR FINALIZACIÓN DE CONTRATO</p>
+                                </td>
+                            </tr>
+                        <tr>
+                            <div style="float: left;">
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 30px; font-size: 13px;"><b>Empresa:</b> <t t-esc="doc.employeeid.address_id.name"/></p>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Código Trabajador:</b> <t t-esc="doc.employeeid.barcode"/></p>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Nombre:</b> <t t-esc="doc.employeeid.name"/></p>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 30px; font-size: 13px;"><b>Motivo:</b> <t t-esc="doc.reason"/></p>
+                                </td>
+                            </div>
+                            <div style="float: right;">
+                                <td colspan="2">
+                                    <t t-set="current_date" t-value="datetime.datetime.now()"/>
+                                    <h6 style="display: block; margin-bottom: 30px; text-align: left;  width: 98%;"><b>Fecha:</b>   
+                                    <t t-esc="current_date.strftime('%d de ')"/>
+                                    <t t-esc="current_date.strftime('%B de %Y')"/></h6>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicio Laboral:</b> <t t-esc="doc.employeeid.contract_ids.date_start.strftime('%d / %m / %Y')"/></p>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Fin Laboral:</b> <t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                </td>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 30px; font-size: 13px;"><b>Días Laborados:</b> <t t-esc="int(doc.days_lab)"/></p>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <div style="clear: both;">
+                                <td colspan="2">
+                                    <span t-if="doc.reason == 'Despido'">
+                                        <t t-set="current_date" t-value="datetime.datetime.now()"/>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>A. INDEMNIZACIÓN</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Salario Promedio Mensual: </b>Q. <span t-esc="('%.' + str(2) + 'f') % doc.average_salary"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr style="border:none;">
+                                                <td style="width: 33%; text-align: left; border:none;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Promedio Diario:</b> Q. <span t-esc="('%.' + str(2) + 'f') % doc.daily_average_field"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center; border:none;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">X DIAS LABORADOS </p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right; border:none;">
+                                                    <p style="margin-bottom: 20px; font-size: 13px;"><b>Total Indemnización:</b> Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_indemnizacion"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>B. BONO 14</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.last_bono14.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Días: </b> <t t-esc="int(doc.days_b14)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PROMEDIO / 360</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 20px; font-size: 13px;"><b>Total Bono 14: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_bono14"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>C. AGUINALDO</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.last_aguinaldo.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Días: </b> <t t-esc="int(doc.days_agui)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PROMEDIO / 360</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 20px; font-size: 13px;"><b>Total Aguinaldo: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_aguinaldo"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>D. VACACIONES</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.employeeid.contract_ids.date_start.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Vacaciones: </b> <t t-esc="int(doc.vac_employee)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">(SUELDO P. / 31) X T. VACACIONES</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 20px; font-size: 13px;"><b>Total Vacaciones: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_vac"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <span t-if="doc.pending_salary != 0.0">
+                                            <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>E. SUELDO</b></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PENDIENTE</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 20px; font-size: 13px;"><b>Total Pendiente: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.pending_salary"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </span>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px; color: blue;"><b>SUMA TOTAL</b></p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 30px; font-size: 13px; color: blue;"><b>Total: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.total"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </span>
+                                    <span t-if="doc.reason == 'Renuncia'">
+                                        <t t-set="current_date" t-value="datetime.datetime.now()"/>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>A. BONO 14</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.last_bono14.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Días: </b> <t t-esc="int(doc.days_b14)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PROMEDIO / 360</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 30px; font-size: 13px;"><b>Total Bono 14: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_bono14"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>B. AGUINALDO</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.last_aguinaldo.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Días: </b> <t t-esc="int(doc.days_agui)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PROMEDIO / 360</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 30px; font-size: 13px;"><b>Total Aguinaldo: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_aguinaldo"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>C. VACACIONES</b></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Inicia: </b><t t-esc="doc.employeeid.contract_ids.date_start.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="display: block; margin-bottom: 13px; font-size: 13px;"><b>Finaliza: </b><t t-esc="current_date.strftime('%d / %m / %Y')"/></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"><b>Total Vacaciones: </b> <t t-esc="int(doc.vac_employee)"/></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">(SUELDO P. / 31) X T. VACACIONES</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 30px; font-size: 13px;"><b>Total Vacaciones: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.tot_vac"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <span t-if="doc.pending_salary != 0.0">
+                                            <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>D. SUELDO</b></p>
+                                        </td>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;">SUELDO PENDIENTE</p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 30px; font-size: 13px;"><b>Total Pendiente: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.pending_salary"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </span>
+                                        <table style="width: 100%; border-color: white;">
+                                            <tr>
+                                                <td style="width: 33%; text-align: left;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px;"></p> 
+                                                </td>
+                                                <td style="width: 33%; text-align: center;">
+                                                    <p style="margin-bottom: 5px; font-size: 13px; color: blue;"><b>SUMA TOTAL</b></p>
+                                                </td>
+                                                <td style="width: 33%; text-align: right;">
+                                                    <p style="margin-bottom: 70px; font-size: 13px; color: blue;"><b>Total: </b>  Q. <span t-esc="('%.' + str(2) + 'f') % doc.total"/></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </span>
+                                </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div style="float: left;">
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 5px; font-size: 13px;"><b>Recibi de:</b> <t t-esc="doc.employeeid.address_id.name"/></p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 10px; font-size: 13px;"><b>La cantidad de:</b> Q. <span t-esc="('%.' + str(2) + 'f') % doc.total"/></p>
+                                    </td>
+                                </div>
+                                <div style="clear: both;">
+                                    <td colspan="2">
+                                            <p style="display: block; margin-bottom: 5px; font-size: 13px; text-align: justify;">Con el recibo del presente Finiquito Laboral, declaro completamente 
+                                            finalizado mi contrato o relación de trabajo con la empresa. Además hago constar que durante el tiempo que preste mis servicios a esta, me fueron pagados 
+                                            mis salarios ordinarios y extraordinarios completos, así como Aguinaldo, Vacaciones, y además prestaciones legales. Por lo cual no tengo ningún tipo de reclamo 
+                                            de carácter laboral, civil o cualquier otra naturaleza que hacer contra "<t t-esc="doc.employeeid.address_id.name"/>" y como  consecuencia otorgo a favor 
+                                            de la citada empresa el más amplio total y eficaz  FINIQUITO LABORAL.</p>
+                                    </td>
+                                </div>
+                                <div class="footer">
+                                        <td colspan="2">
+                                            <p style="margin-bottom: 50px; font-size: 1px; text-align: center;">.</p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="margin-bottom: 5px; font-size: 10px; text-align: center;">_________________________________________</p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="margin-bottom: 5px; font-size: 10px; text-align: center;">FIRMA DEL TRABAJADOR</p>
+                                        </td>
+                                        <td colspan="2">
+                                            <p style="margin-bottom: 5px; font-size: 10px;text-align: center;"><b>Con DPI: </b> <t t-esc="doc.employeeid.identification_id"/></p>
+                                        </td>
+                                </div>
+                            </td>
+                                
+                        </tr>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
