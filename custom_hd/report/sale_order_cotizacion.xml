@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="cotizacion">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="header">
+                                <img tyle="text-align: left" src="/custom_hd/static/src/img/rojo.jpg" style="width=5px height=5px;"/>
+                            </div>
+                            <div class="page">
+                                <table style="width: 100%; margin-bottom: 80px;">
+                                    <tr>
+                                        <td style="width: 50%; text-align: center;">
+                                        </td>
+                                        <td style="width: 50%; text-align: left;">
+                                            <span t-field="doc.partner_id.name" style="font-size: 30px;"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 22px;">
+                                    <tr>
+                                        <td style="border: none; padding: 5px;"><b>Tipo:</b></td>
+                                        <td style="border: none; padding: 5px;"><b>Fecha de cotización:</b></td>
+                                        <td style="border: none; padding: 5px;"><b>Plazos de pago:</b></td>
+                                        <td style="border: none; padding: 5px;"><b>Comercial:</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none; padding: 5px;"><span t-field="doc.invoice_status"/></td> <!-- cambiar por "tipo" ya en produccion -->
+                                        <td style="border: none; padding: 5px;"><span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/></td>
+                                        <td style="border: none; padding: 5px;"><span t-field="doc.payment_term_id.name"/></td>
+                                        <td style="border: none; padding: 5px;"><span t-field="doc.user_id.name"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="page" style="border: 2px solid red; padding: 10px; border-radius: 10px;">
+                                <div class="page">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>Descripción</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Impuestos</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr t-foreach="doc.order_line" t-as="line">
+                                                <td><span t-field="line.product_id.name" /></td>
+                                                <td><span t-field="line.product_uom_qty" t-options='{"widget": "field_float", "digits": [16, 2]}' /> Unidad</td>
+                                                <td><span t-field="line.price_unit" t-field-options='{"widget": "monetary"}'/></td>
+                                                <td><span t-field="line.tax_id.name" /></td>
+                                                <td><span t-field="line.price_total" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="page">
+                                    <table class="table table-condensed" style="border-collapse: collapse;">
+                                        <tfoot>
+                                            <tr style="border: none;">
+                                                <td style="border: none;" ></td> 
+                                                <td style="border: none;"></td> 
+                                                <td style="border: none;"></td> 
+                                                <td class="text-right" style="width: 100px;"><b>Subtotal:</b> </td>
+                                                <td class="text-right" style="width: 100px;">
+                                                    <span t-field="doc.amount_untaxed" t-options='{"widget": "monetary"}' />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: none;"></td> 
+                                                <td style="border: none;"></td> 
+                                                <td style="border: none;"></td> 
+                                                <td class="text-right" style="border: none;"><b>IVA 12%:</b></td>
+                                                <td class="text-right" style="border: none;">
+                                                    <span t-field="doc.amount_tax" t-options='{"widget": "monetary"}' />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border: none;"></td> 
+                                                <td style="border: none;"></td> 
+                                                <td style="border: none;"></td> 
+                                                <td class="text-right"><b>Total:</b></td>
+                                                <td class="text-right">
+                                                    <span t-field="doc.amount_total" t-options='{"widget": "monetary"}' />
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="width: 40%; text-align: center; margin-right: 800px;">
+                                            <img src="/custom_hd/static/src/img/powerflex.png" alt="Imagen 1" style="max-width: 200px;" />
+                                        </td>
+                                        <td style="width: 40%; text-align: center; margin-left: 800px;">
+                                            <img src="/custom_hd/static/src/img/aignep.png" alt="Imagen 2" style="max-width: 200px;" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                            </div>
+                            <p style="page-break-after:always;">   </p>
+                            <p> Test New Page  </p>
+                            <div class="page">
+                                <div class="page" style="border: 2px solid red; padding: 10px; border-radius: 10px;">
+                                    <h6 style="color: red;">GARANTÍA:</h6>
+                                    <p style="margin-bottom: 3px; text-align: justify;">° Toda garantía se determina si aplica o no, con el diagnostico de un técnico especialista de Hose Depot. </p>
+                                    <P style="margin-bottom: 3px;text-align: justify;">° El mal uso, negligencia y/o alteración por parte del cliente en un trabajo o producto, invalida la garantía de este.</P>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° Las visitas a campo por reclamos de garantía solo se realizarán si el servicio original fue contratado
+                                        igualmente en campo.</p>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° La única obligación que asume Hose Depot es la de reponer la cantidad del producto comprado que
+                                        se compruebe haya resultado defectuoso.</p>
+                                    <p style="margin-bottom: 15px;text-align: justify;">° Los productos electrónicos no cuentan con garantía.</p>
+                                    <h6 style="color: red;">PRECIOS:</h6>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° Los precios están sujetos a cambios sin previo aviso, pero tales cambios no afectarán a los
+                                        pedidos ya confirmados.</p>
+                                    <p style="margin-bottom: 15px;text-align: justify;">° Los precios incluyen IVA.</p>
+                                    <h6 style="color: red;">TIEMPOS DE ENTREGA:</h6>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° Retrasos en la entrega por causas de fuerza mayor como, desastres naturales, guerras o
+                                        huelgas no serán imputables a HOSE DEPOT.</p>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° El tiempo de entrega está sujeto a existencias.</p>
+                                    <p style="margin-bottom: 15px;text-align: justify;">° Los pagos realizados por medio de cheque o transferencia electrónica de un banco a otro
+                                        quedan sujetos a los tiempos de compensación habituales y la entrega de productos
+                                        quedan igualmente sujeta a este.</p>
+                                    <h6 style="color: red;">GENERALIDADES</h6>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° Todos los productos que se ofrecen se encuentran sujetos a disponibilidad.</p>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° La autorización de la presente cotización implica la aceptación, por parte del cliente, de los
+                                        términos y condiciones descritos.</p>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° Se cobrarán Q200.00 por cheques rechazados. </p>
+                                    <p style="margin-bottom: 3px;text-align: justify;">° No se aceptan cambios ni devoluciones.</p>
+                                </div>
+                                
+                            </div>
+                            <div class="footer">
+                                <p>garcias</p>
+                            </div> 
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
