@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="id_empl" model="ir.ui.view">
+            <field name="name">id.empl</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <button name="generate_random_barcode" position="replace">
+                    <button string="Generate" class="btn btn-link" type="object" name="generate_random_barcode" attrs="{'invisible': ['|', ('barcode', '==', False),('barcode', '!=', False)]}"/>
+                </button>
+                <!--<field name="user_id" position="after">
+                    <field name="codigo_empleado"/> 
+                </field>-->
+                <button name="393" position="before">
+                    <button name="update_codigo_empleado" string="Asignar Código" type="object" class="btn btn-primary" attrs="{'invisible': [('barcode', '!=', False)]}"/>
+                </button>
+            </field>
+        </record>
+
+        <record id="view_hr_employee_settings_form_cod" model="ir.ui.view">
+            <field name="name">hr.employee.settings.form.cod</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="hr.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='hr_presence_options']" position="after">
+                    <h2>Codigo de Empleado</h2>
+                    <p>Siguiente código a ser asignado:</p>
+                    <div class="col 12 col-lg-6 o_setting_box">
+                        <field name="cod_emp" string="Código empleado"/>
+                    </div>
+                </xpath>    
+            </field>
+        </record>
+    </data>
+</odoo> 
