@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="vac_report">  
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <tr>
+                                <td colspan="2">
+                                    <p style="display: block; margin-bottom: 30px; font-size: 15px; text-align: center;">LIQUIDACIÓN DE VACACIONES</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <div style="float: left;">
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 30px; font-size: 15px;"><b>Empresa:</b> <t t-esc="doc.employeeid.address_id.name"/></p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 5px; font-size: 15px;"><b>Código Trabajador:</b> <t t-esc="doc.employeeid.barcode"/></p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 5px; font-size: 15px;"><b>Nombre:</b> <t t-esc="doc.employeeid.name"/></p>
+                                    </td>
+                                    
+                                </div>
+                                <div style="float: right;">
+                                    <td colspan="2">
+                                        <t t-set="current_date" t-value="datetime.datetime.now()"/>
+                                        <h6 style="display: block; margin-bottom: 30px; text-align: left;  width: 98%;"><b>Fecha:</b>   
+                                        <t t-esc="current_date.strftime('%d / ')"/>
+                                        <t t-esc="current_date.strftime('%m / %Y')"/></h6>
+                                    </td>
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 5px; font-size: 15px;"><b>Inicio Laboral:</b> <t t-esc="doc.employeeid.contract_ids.date_start.strftime('%d / %m / %Y')"/></p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p style="display: block; margin-bottom: 80px; font-size: 15px;"><b>Periodo:</b> <t t-esc="doc.period"/></p>
+                                    </td>
+                                </div>
+                            </tr>
+                        </div>
+                        <div class="tab" style="border: 2px solid red; padding: 10px; border-radius: 10px;">
+                            <td colspan="6">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Periodo</th>
+                                            <th>Fecha Desde</th>
+                                            <th>Fecha Hasta</th>
+                                            <th>Tipo de Ausencia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.vac_list" t-as="line">
+                                            <td><span t-field="line.name"/></td>
+                                            <td><span t-field="line.date_from" t-options='{"widget": "date"}'/></td>
+                                            <td><span t-field="line.date_to" t-options='{"widget": "date"}'/></td>
+                                            <td><span t-field="line.holiday_status_id.name"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </div>
+                        <div class="page">
+                            <p style="display: block; margin-bottom: 30px; font-size: 15px;"><b>Saldo Pendiente de Pago:</b> <t t-esc="doc.tot_vac" /></p>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
