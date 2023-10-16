@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_ingresos"
+        string="Constancia de Ingresos"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="rrhh_liquidaciones.ingresos_report"
+        file="rrhh_liquidaciones.ingresos_report"
+    />
+
+    <report
+        id="report_constancia"
+        string="Constancia Laboral"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="rrhh_liquidaciones.CLaboral_report"
+        file="rrhh_liquidaciones.CLaboral_report"
+    />
+
+    <report
+        id="report_cuenta"
+        string="Constancia Apertura de Cuenta"
+        model="hr.employee"
+        report_type="qweb-pdf"
+        name="rrhh_liquidaciones.CCuenta_report"
+        file="rrhh_liquidaciones.CCuenta_report"
+    />
+
+    <report
+        id="report_prestaciones"
+        string="Calculo Prestaciones"
+        model="hr.employee.pres"
+        report_type="qweb-pdf"
+        name="rrhh_liquidaciones.prestaciones_report"
+        file="rrhh_liquidaciones.prestaciones_report"
+    />
+
+    <report
+        id="report_vac"
+        string="Calculo Vacaciones"
+        model="hr.employee.vac"
+        report_type="qweb-pdf"
+        name="rrhh_liquidaciones.vac_report"
+        file="rrhh_liquidaciones.vac_report"
+    />
+</odoo>
