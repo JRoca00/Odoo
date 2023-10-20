@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-hr_employee_pres,access_custom_rh,model_hr_employee_pres,base.group_user,1,1,1,1
-hr_employee_vac,access_custom_rh,model_hr_employee_vac,base.group_user,1,1,1,1
