@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="CCuenta_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="doc">
+                        <tr>
+                            <td colspan="2">
+                                <p style="display: block; margin-bottom: 80px; font-size: 1px;">.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <t t-set="current_date" t-value="datetime.datetime.now()"/>
+                                <h5 style="display: block; margin-bottom: 110px; text-align: right;  width: 98%;">Guatemala,  
+                                <t t-esc="current_date.strftime('%d de ')"/>
+                                <t t-esc="current_date.strftime('%B de %Y')"/></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h4 style="display: block; margin-bottom: 80px; font-weight: bold;">A QUIEN INTERESE:</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <t t-set="start_date" t-value="doc.contract_ids.date_start"/>
+                                <p style="display: block; margin-bottom: 125px; text-align: justify; width: 98%; font-size: 20px;">
+                                Por medio de la presente solicitamos que le sea aperturada la cuenta a nombre del Sr. <b><t t-esc="doc.name"/>,</b> 
+                                quien se identifica con el Documento de Identificación Personal número <t t-esc="doc.identification_id"/> e incluirle a nombre de la
+                                empresa <t t-esc="doc.address_id.name"/> por adquirir servicios de pago de planilla para que sean acreditados 
+                                sus respectivos salarios.
+                                <br/>
+                                <br/>
+                                Certificando que la persona descrita en dicho documento es empleado de esta empresa, comprometiéndonos a informar al banco 
+                                cuando sea retirado de la misma.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p style="display: block; margin-bottom: 75px; font-weight: bold;font-size: 20px;">Atentamente,</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <t t-set="current_user" t-value="env.user.name" />
+                                <t t-set="job_user" t-value="env.user.partner_id.function" />
+                                <p style="display: block; margin-bottom: 30px; font-weight: bold; font-size: 20px;"><t t-esc="current_user" /><br/><t t-esc="job_user" /></p>
+                            </td>
+                        </tr>
+
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
