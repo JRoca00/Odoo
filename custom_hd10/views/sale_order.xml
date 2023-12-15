@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_settings_form" model="ir.ui.view">
+            <field name="name">view.sale.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='amazon_connector']" position="after">
+                        <h2>Permitir Cotización</h2>
+                        <div class="row mt16 o_settings_container">
+                            <field name="user_assigning" widget="many2many_tags"/>
+                        </div>  
+                </xpath> 
+            </field>
+        </record>
+
+
+        <record id="view_sale_order_form_nue" model="ir.ui.view">
+            <field name="name">sale.order.form.nue</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm']" position="replace">
+                    <field name="confirm_co" invisible="1"/>
+                    <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': ['|',('state', 'not in', ['sent']),('confirm_co', '=', False)]}"/>
+                </xpath>
+                <button name="action_quotation_send" position="before">
+                    <field name="visible" invisible="1"/>
+                    <field name="accepted_co" invisible="1"/>
+                    <button name="action_accept_quotation" string="Aceptar Cotización" type="object" class="btn btn-primary" attrs="{'invisible': ['|',('accepted_co', '!=', True),('visible', '=', False)]}"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</odoo>
