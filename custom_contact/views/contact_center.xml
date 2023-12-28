@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="view_tree_contact_center" model="ir.ui.view">
+            <field name="name">contact.center.tree</field>
+            <field name="model">contact.center</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Referencia"/>
+                    <field name="type" string="Medio de Contacto"/>
+                    <field name="tipo_solicitud_id"/>
+                    <field name="create_uid" string="Creado por"/>
+                    <field name="gestor" string="Gestionado por"/>
+                    <field name="create_date"/>
+                    <field name="done_date" string="Fecha de Finalización"/>
+                    <field name="diferencia_fechas" string="Días en Resolución"/>
+                    <field name="diferencia_fechas_horas" string="Horas de Resolución"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario Soporte -->
+        <record id="view_form_contact_center" model="ir.ui.view">
+            <field name="name">contact.center.form</field>
+            <field name="model">contact.center</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="btn_process" string="Procesar"  type="object" class="btn-primary" states="draft"/>
+                        <button name="btn_cancel" string="Cancelar"  type="object" class="btn-primary" states="draft"/>
+                        <button name="btn_done" string="Terminar"  type="object" class="btn-primary" states="process"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,process,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name" readonly="1" style="font-size: 24px; font-weight: bold; color: #7E6EAC;"/>
+                            <group>
+                                <field name="create_date" readonly="1" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                                <field name="process_date" readonly="1" attrs="{'invisible': [('state', '!=', 'process')]}"/>
+                                <field name="done_date" string="Fecha de Finalización" readonly="1" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                                <field name="type" string="Medio de Contacto" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="employee_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="mobile_phone" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="ticket_id" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="gestor" string="Gestionado por" attrs="{'readonly': ['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
+                            </group>
+                            <group>
+                                <field name="visible" invisible="1"/>
+                                <field name="project" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="boss_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="tipo_solicitud_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="subtipo_solicitud_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="tipologia_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="monto" attrs=" {'invisible': [  ('visible', '=', False)], 'required': [('visible', '=', True)],'readonly': ['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Descripción" name="description">
+                                <group>
+                                    <field name="note" nolabel="1" placeholder="Documentación de la llamada..." required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </page>
+                            <page string="Resolución" name="resolution">
+                                <group>
+                                    <field name="notere" nolabel="1" placeholder="Resolución de la llamada..." attrs="{'required': [('state', '=', 'process')], 'readonly': ['|',('state', '=', 'done'),('state', '=', 'cancel')]}"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_mi_objeto" model="ir.actions.act_window">
+            <field name="name">Departamento de Soporte y Atención al Colaborador</field>
+            <field name="res_model">contact.center</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Vista de Formulario Tipo de Solicitud-->
+        <record id="view_form_contact_center_tipo_solicitud" model="ir.ui.view">
+            <field name="name">contact.center.tipo_solicitud.form</field>
+            <field name="model">contact.center.tipo_solicitud</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <form>
+                        <group>
+                            <field name="name"/>
+                            <field name="monto_reclamo"/>
+                        </group>
+                    </form>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario SubTipo de Solicitud-->
+        <record id="view_form_contact_center_subtipo_solicitud" model="ir.ui.view">
+            <field name="name">contact.center.subtipo_solicitud.form</field>
+            <field name="model">contact.center.subtipo_solicitud</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <form>
+                        <group>
+                            <field name="name"/>
+                            <field name="tipo_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/>
+                        </group>
+                    </form>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </field>
+        </record>
+
+        <!-- Vista de Formulario Tipologia-->
+        <record id="view_form_contact_center_tipologia" model="ir.ui.view">
+            <field name="name">contact.center.tipologia.form</field>
+            <field name="model">contact.center.tipologia</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <sheet>
+                    <form>
+                        <group>
+                            <field name="name"/>
+                            <field name="subtipo_id" required="1" options="{'no_open': True, 'no_create_edit': True, 'no_create': True}"/>
+                        </group>
+                    </form>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </field>
+        </record>
+
+
+        <!-- Vista de Arbol Configuracion-->
+        <record id="view_tree_contact_center_subtipo_solicitud" model="ir.ui.view">
+            <field name="name">contact.center.subtipo_solicitud.tree</field>
+            <field name="model">contact.center.subtipo_solicitud</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Sub-Tipo"/>
+                    <field name="tipo_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_tree_contact_center_tipologia" model="ir.ui.view">
+            <field name="name">contact.center.tipologia.tree</field>
+            <field name="model">contact.center.tipologia</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="Tipología"/>
+                    <field name="subtipo_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Llamado en menu-->
+        <record id="action_contact_center_tipo_solicitud" model="ir.actions.act_window">
+            <field name="name">Tipos de Solicitud</field>
+            <field name="res_model">contact.center.tipo_solicitud</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        
+        <record id="action_contact_center_subtipo_solicitud" model="ir.actions.act_window">
+            <field name="name">Subtipos de Solicitud</field>
+            <field name="res_model">contact.center.subtipo_solicitud</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="action_contact_center_tipologia" model="ir.actions.act_window">
+            <field name="name">Tipologías</field>
+            <field name="res_model">contact.center.tipologia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_root" name="SAC" sequence="10"/>
+        <menuitem id="menu_mi_objeto" parent="menu_root" name="Soporte" action="action_mi_objeto"/>
+
+        <menuitem id="menu_configuracion" parent="menu_root" name="Configuración" sequence="20"/>
+        <menuitem id="menu_tipo_solicitud" parent="menu_configuracion" name="Tipos de Solicitud" action="action_contact_center_tipo_solicitud"/>
+        <menuitem id="menu_subtipo_solicitud" parent="menu_configuracion" name="Subtipos de Solicitud" action="action_contact_center_subtipo_solicitud"/>
+        <menuitem id="menu_tipologia" parent="menu_configuracion" name="Tipologías" action="action_contact_center_tipologia"/>
+
+
+
+    </data>
+</odoo>
