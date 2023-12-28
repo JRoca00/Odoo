@@ -1,5 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-contact_center,access_contact_center,model_contact_center,base.group_user,1,1,1,1
-contact_center_tipo_solicitud,access_contact_center_tipo_solicitud,model_contact_center_tipo_solicitud,base.group_user,1,1,1,1
-contact_center_subtipo_solicitud,access_contact_center_subtipo_solicitud,model_contact_center_subtipo_solicitud,base.group_user,1,1,1,1
-contact_center_tipologia,access_contact_center_tipologia,model_contact_center_tipologia,base.group_user,1,1,1,1
