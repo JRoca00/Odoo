@@ -118,8 +118,8 @@
                     <div style="border-top: 1px solid blue; margin-bottom: 5px;"></div>
                     
                     <div>
-                        <p style="color: blue; font-size: 19px; text-align: center; margin-bottom: 4px;"><span t-field="doc.company_id.street"/> <span t-field="doc.company_id.country_id.name"/> <span t-field="doc.company_id.zip"/></p>
-                        <p style="color: blue; font-size: 17px; text-align: center; margin-bottom: 0px;">PBX: +(502) <span t-field="doc.company_id.phone"/> ° <span t-field="doc.company_id.website"/> ° <span t-field="doc.company_id.email"/></p>
+                        <p style="color: blue; font-size: 16px; text-align: center; margin-bottom: 4px;"><span t-field="doc.company_id.street"/> <span t-field="doc.company_id.country_id.name"/> <span t-field="doc.company_id.zip"/></p>
+                        <p style="color: blue; font-size: 16px; text-align: center; margin-bottom: 0px;">PBX: +(502) <span t-field="doc.company_id.phone"/> ° <span t-field="doc.company_id.website"/> ° <span t-field="doc.company_id.email"/></p>
                     </div>
                 </div>
                 <div class="page">
