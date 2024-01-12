@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cotizacion">
+        <t t-call="web.html_container">
+            <head>
+                <meta charset="UTF-8"/>
+            </head>
+            <t t-foreach="docs" t-as="doc">
+                <div class="header" style="position: relative;">
+                    <img src="/custom_sistasa/static/src/img/encabezado_sistasas.png" alt="Imagen 1" style="width: 100%; height: 130px; margin-left: 0px; margin-right: 0px;" />
+                </div>
+                <div class="page">
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 100px; font-size: 1px;">.</p>
+                        </td>
+                    </tr>
+
+                    <!--<tr>
+                        <td colspan="2">
+                            <p style="display: block;  margin-bottom: 40px; font-size: 20px">Proyecto:  <t t-esc="doc.name" /> </p>
+                        </td>
+                    </tr>-->
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block;  margin-bottom: 50px; font-size: 20px; font-family: 'Arial Narrow', sans-serif;">Atención: <span t-field="doc.partner_id.name"/>
+                            <!--<span t-if="doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact')">
+                                 <span t-if="len(doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact')) == 1">
+                                    <span t-field="doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact').name"/>
+                                </span>
+                                <span t-else="">
+                                    Si hay varios contactos, devuelve el nombre del cliente principal 
+                                    <span t-field="doc.partner_id.name"/>
+                                </span>
+                            </span>
+                            <span t-else="">-->
+                                <!-- Si no hay contactos, devuelve el nombre base del cliente 
+                                <span t-field="doc.partner_id.name"/>
+                            </span>-->
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Muchas gracias por contactarnos. SISTASA es una empresa profesional dedicada al
+                            desarrollo y equipamiento de audiovisuales a empresas e iglesias. Contamos con sedes en
+                            Estados Unidos, México, Colombia, República Dominicana y Guatemala. Ofrecemos un
+                            producto de calidad superior diseñado específicamente para los estándares de hoy.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Después de años de mejora continua contamos con productos de última tecnología y diseño
+                            que le proporcionará estatus y confort. Cada línea de producto es moderna y cuenta con
+                            personal profesional para la atención y asesoría de nuestros clientes.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Al mismo tiempo, nos gustaría destacar nuestros servicios:
+                            </p>
+                        </td>
+                    </tr>
+                        <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 10px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            ° Asesoría en todo tiempo.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 10px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            ° Soporte 24/7.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 10px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            ° Instalación y capacitación del equipo vendido.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 50px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            ° Mantenimiento y proveeduría de repuestos.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 35px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Somos un equipo con un espíritu de servicio y detallista, para llevar la excelencia y la
+                            expansión en cada proyecto que implementamos.</b>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 10px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Quedamos a sus órdenes para resolver cualquier inquietud.
+                            </p>
+                        </td>
+                    </tr>
+
+
+                    <p style="page-break-after:always;">   </p> 
+                </div>
+                <div class="footer">
+                    <div style="border-top: 1px solid blue; margin-bottom: 5px;"></div>
+                    
+                    <div>
+                        <p style="color: blue; font-size: 15px; text-align: center; margin-bottom: 4px;"><span t-field="doc.company_id.street"/> <span t-field="doc.company_id.country_id.name"/> <span t-field="doc.company_id.zip"/></p>
+                        <p style="color: blue; font-size: 16px; text-align: center; margin-bottom: 0px;">PBX: +(502) <span t-field="doc.company_id.phone"/> ° <span t-field="doc.company_id.website"/> ° <span t-field="doc.company_id.email"/></p>
+                    </div>
+                </div>
+                <div class="page">
+
+                    <!--<p style="display: block; margin-bottom: 2px; font-size: 1px;">.</p>-->
+                    <div class="page">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 57%; box-sizing: border-box;">
+                                    <div style="padding: 5px; border: 2px solid blue; border-radius: 30px; line-height: 0.6;">
+                                        <p style="color: blue; font-size: 17px; font-family: 'Arial Narrow', sans-serif; margin-bottom: 3px;"><b>Nombre: </b><span t-field="doc.partner_id.name" style="color: black; font-size: 17px;"/></p>
+                                        
+                                        <p style="color: blue; font-size: 17px; font-family: 'Arial Narrow', sans-serif; margin-bottom: 3px;">
+                                            <span t-if="doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact')">
+                                                <span t-if="len(doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact')) == 1">
+                                                    <b>Contacto:</b> <span t-field="doc.partner_id.child_ids.filtered(lambda c: c.type == 'contact').name" style="color: black; font-size: 17px;"/>
+                                                </span>
+                                                <span t-else="">
+                                                    <!-- Si hay varios contactos, devuelve el nombre del cliente principal -->
+                                                </span>
+                                            </span>
+                                            <span t-else="">
+                                                <!-- Si no hay contactos, devuelve el nombre base del cliente -->
+                                            </span>
+                                        </p>
+                                        <p style="color: blue; font-size: 17px; font-family: 'Arial Narrow', sans-serif; margin-bottom: 3px;"><b>Email: </b><span t-field="doc.partner_id.email" style="color: black; font-size: 17px;"/></p>
+                                        <p style="color: blue; font-size: 17px; font-family: 'Arial Narrow', sans-serif;"><b>Teléfono: </b><span t-field="doc.partner_id.phone" style="color: black; font-size: 17px;"/></p>
+                                        <p style="color: blue; font-size: 17px; font-family: 'Arial Narrow', sans-serif;"><b>Le atendió: </b><span t-field="doc.user_id.name" style="color: black; font-size: 17px;"/></p>
+                                    </div>
+                                </td>
+                                <td style="width: 2%;"></td>
+                                <td style="width: 41%; background-color: #add8e6; padding: 5px; border-radius: 30px; box-sizing: border-box; line-height: 1.6;">
+                                    <p style="color: blue; font-size: 20px; font-family: 'Arial Narrow', sans-serif; text-align: center; margin-bottom: 2px;"><b>Cotización</b></p>
+                                    <p style="color: blue; font-size: 18px; font-family: 'Arial Narrow', sans-serif; text-align: center;"><b>No.  <span t-field="doc.name"/></b></p>
+                                    <p style="color: black; font-size: 16px; font-family: 'Arial Narrow', sans-serif; text-align: center;">Guatemala, <span t-field="doc.date_order" t-options='{"widget": "date"}'/></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p style="display: block; margin-bottom: 5px; font-size: 1px;">.</p>
+                    <p style="display: block; margin-bottom: 5px; margin-top: 0px; font-size: 16px; font-family: 'Arial Narrow', sans-serif;">Vigencia de Precios: <span t-field="doc.validity_date" style="color: black; font-size: 17px;" t-options='{"widget": "date"}'/></p>
+                    <p style="display: block; margin-bottom: 10px; margin-top: 0px; font-size: 16px; font-family: 'Arial Narrow', sans-serif;">Condiciones de Pago: <span t-field="doc.payment_term_id" style="color: black; font-size: 17px;"/></p>
+                    <div class="page" style="border: 2px solid blue; padding: 10px; border-collapse: collapse; border-radius: 30px;">
+                        <div class="page">
+                            <table style="border-collapse: collapse; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 10%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Imagen</th>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 10%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Modelo</th>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 40%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Descripción</th>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 10%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Cantidad</th>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 10%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Precio Unitario</th>
+                                        <th style=" border-bottom: 1px solid #ccc; max-width: 20%; padding: 10px; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.order_line" t-as="line">
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 10%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><img t-attf-src="data:image/*;base64,{{line.product_id.image_1920}}" style="max-width: 100px; max-height: 80px;"/></td>
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 10%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><span t-field="line.product_id.modelo" /></td>
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 40%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><span t-field="line.name" /></td>
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 10%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><span t-field="line.product_uom_qty" /></td>
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 10%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><span t-field="line.price_unit" t-options='{"widget": "monetary"}'/></td>
+                                        <td style="border-bottom: 1px solid #ccc; padding: 10px; max-width: 20%; text-align: left; font-family: 'Arial Narrow', sans-serif; font-size: 15px;"><span t-field="line.price_total" t-options='{"widget": "monetary"}' /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="display: block; margin-bottom: 10px; font-size: 1px;">.</p>
+                        <div class="page">
+                            <table class="table table-condensed" style="border-collapse: collapse; width: 100%;">
+                                <tfoot>
+                                    <tr>
+                                        <td style="border: none; width: 30%; padding: 10px;"></td> 
+                                        <td style="border: none; width: 20%; padding: 10px;"></td> 
+                                        <td style="border: none; width: 20%; padding: 10px;"></td> 
+                                        <td class="text-right" style="border-top: 3px solid #ccc; width: 15%; text-align: center; padding: 10px; font-size: 13px;"><b>Subtotal:</b></td>
+                                        <td class="text-right" style="border-top: 3px solid #ccc; width: 15%; padding: 10px; font-size: 13px;">
+                                            <span t-field="doc.amount_untaxed" t-options='{"widget": "monetary"}' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;"></td> 
+                                        <td style="border: none;"></td> 
+                                        <td style="border: none;"></td> 
+                                        <td class="text-right" style="border-bottom: 3px solid #ccc; text-align: center; padding: 10px; font-size: 13px;"><b>IVA 12%:</b></td>
+                                        <td class="text-right" style="border-bottom: 3px solid #ccc; padding: 10px; font-size: 13px;">
+                                            <span t-field="doc.amount_tax" t-options='{"widget": "monetary"}' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;"></td> 
+                                        <td style="border: none;"></td> 
+                                        <td style="border: none;"></td> 
+                                        <td class="text-right" style="text-align: center; padding: 10px; font-size: 13px;"><b>Total:</b></td>
+                                        <td class="text-right" style="padding: 10px; font-size: 13px;">
+                                            <b><span t-field="doc.amount_total" t-options='{"widget": "monetary"}' /></b>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>                                
+                        </div>
+                    </div>
+
+                    <p style="page-break-after:always;">   </p> 
+                </div>
+                <div class="page">
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 50px; font-size: 1px;">.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 3px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Garantías por Defectos de Fabricación:</b>
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Pantallas: 2 años  
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Procesadores: 1 año
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Tarjetas Receptoras: 1 año
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Fuentes de Poder: 1 año
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Audio Profesional: 1 año
+                            </p>
+                            <p style="display: block; margin-bottom: 25px; margin-top: 0px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                                °Mupis: 1 año
+                            </p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Puesta en Operación</b>: Asesoría en sitio para la puesta en operación, 
+                            así como capacitación en la operación del software a personal 
+                            con conocimientos y experiencia. No incluye envío a departamentos.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Instalación</b>: No se considera en el presupuesto el costo de la estructura ni instalación
+                            de soporte de la pantalla, trabajos de cimentación, acondicionamiento o refuerzo de estructuras 
+                            existentes; fabricación de gabinetes, maniobras de instalación, acometidas eléctricas y de datos. 
+                            (Se agenda una reunión para toma de requerimientos en el sitio de instalación para luego realizarles una cotización de los puntos anteriores).
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 25px; text-align: justify; width: 98%; font-size: 15px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Tiempo de Entrega: a convenir</b>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 15px; text-align: justify; width: 98%; font-size: 17px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>ACEPTACIÓN DEL CLIENTE:</b>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 50px; text-align: justify; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Después de haber leído y comprendido los términos y condiciones de esta propuesta, favor de
+                            imprimir, firmar el documento y adjuntarlo a su orden de compra.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 40px; text-align: justify; width: 98%; font-size: 15px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Nombre y firma:</b>________________________________________________________
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 40px; text-align: justify; width: 98%; font-size: 15px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>Fecha:</b>______________________<b>Sello:</b>_____________________________________
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p style="display: block; margin-bottom: 5px; text-align: center; width: 98%; font-size: 15px; font-family: 'Arial Narrow', sans-serif;">
+                            <b>EMITIR CHEQUE A NOMBRE DE: SISTEMAS DE TECNOLOGIA AUTOMATIZADA S.A.</b>
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: center; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Deposito o Transferencia a la siguiente cuenta:
+                            </p>
+                            <p style="display: block; margin-bottom: 3px; margin-top: 0px; text-align: center; width: 98%; font-size: 18px; font-family: 'Arial Narrow', sans-serif;">
+                            Banco Industrial No. 1880077530 Depósitos
+                            </p>
+                        </td>
+                    </tr>
+                </div>
+
+
+            </t>
+        </t>
+    </template>
+</odoo>
