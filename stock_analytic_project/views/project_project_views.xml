@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="project_kanban_view_custom">
+        <field name="name">project.kanban.view.custom</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban[1]/templates[1]/t[1]/div[1]/div[1]/span[1]/field[@name='is_favorite']" position="after">
+                <field name="closed" invisible="1"/>
+                <field name="stage_id" invisible="1"/>
+                <button name="create_account_move_for_pickings" string="Cerrar proyecto" type="object" class="btn-primary" attrs="{'invisible': ['|',('closed', '=', True),('stage_id', '!=', 4)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_project_inherit" model="ir.ui.view">
+            <field name="name">project.project.invoice</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='project_milestone_setting']" position="after">
+                    <field name="closed" string="Cerrado"/>
+                </xpath>
+                <xpath expr="//page[@name='description']" position="after"> 
+                    <page string="Rentabilidad">
+                        <field name="closed" invisible="1"/>
+                        <button name="calculate_utility" string="Calcular Rentabilidad" type="object" class="btn-primary" attrs="{'invisible': [('closed', '=', True)]}"/>
+                        <group string="Rentabilidad">
+                            <!--<field name="labour_amount_crm" string="(+) Mano de Obra CRM" readonly="1"/>
+                            <field name="materials_amount_crm" string="(+) Materiales" readonly="1"/>
+                            <field name="expenses_amount_crm" string="(+) Gastos" readonly="1"/>
+                            <field name="customer_invoices" string="(+) Clientes" readonly="1"/>
+                            <field name="supplier_invoices" string="(-) Proveedores" readonly="1"/>
+                            <field name="total_hours" string="(-) Horas" readonly="1"/>
+                            <field name="stock_move" string="(-) Materiales" readonly="1"/>
+                            <field name="utility" string="Total" readonly="1"/>-->
+
+                            <field name="customer_invoices" string="(+) Clientes" readonly="1"/>
+                            <label for="labour_amount_crm" string="(-) Mano de obra" name="labour_amount_crm"/>
+                            <div class="o_row">
+                                <field name="total_hours" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="labour_amount_crm" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="por_labour_crm_project" class="oe_inline" readonly="1" widget="percentage"/>
+                            </div>
+                            <label for="materials_amount_crm" string="(-) Materiales" name="materials_amount_crm"/>
+                            <div class="o_row">
+                                <field name="stock_move" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="materials_amount_crm" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="por_materials_crm_project" class="oe_inline" readonly="1" widget="percentage"/>
+                            </div>
+                            <label for="expenses_amount_crm" string="(-) Gastos" name="expenses_amount_crm"/>
+                            <div class="o_row">
+                                <field name="supplier_invoices" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="expenses_amount_crm" class="oe_inline" readonly="1"/>
+                                <p>→  </p>
+                                <field name="por_expense_crm_project" class="oe_inline" readonly="1" widget="percentage"/>
+                            </div>
+                            <field name="utility" string="Utilidad" readonly="1"/>
+                        </group>
+                        <group string="Cierre de Proyecto">
+                            <field name="account_move_close" string="Asiento Contable" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>
